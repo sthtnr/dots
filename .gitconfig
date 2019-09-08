@@ -1,0 +1,20 @@
+[core]
+	excludesfile = $HOME/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = sthtnr
+	email = beautifulwindmi11@gmail.com
+	signingkey = BC27DEF734440097
+[commit]
+	template = $HOME/.stCommitMsg
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
+[alias]
+# 良い感じのグラフでログを表示
+	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
