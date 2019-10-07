@@ -9,6 +9,7 @@ plugins=(
 	zsh-syntax-highlighting
 )
 
+ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 #------------------------------------------------------------------------------
@@ -26,6 +27,9 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # added by Anaconda3 4.4.0 installer
 export PATH="$HOME/anaconda/bin:$PATH"
+
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
@@ -55,6 +59,7 @@ alias lt='exa -T'
 alias lf='exa -bghHiS --git'
 
 alias relog='exec $SHELL -l'
+alias his='history'
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 alias dk='docker'
@@ -117,6 +122,21 @@ e() {
     local file
     file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && ${EDITOR} "${file}" || return 1
 }
+
+# fasd & fzf - open finder. If argument given, use `fasd` to pick the best match
+# else use `fzf` to select from `fasd` results.
+unalias o 2>/dev/null
+o() {
+    [ $# -gt 0 ] && fasd -a -e open "$*" && return
+    local res
+    res="$(fasd -Rla "$1" | fzf -1 -0 --no-sort +m)"
+    if [[ -d "${res}" ]]; then
+       open "${res}"
+    else
+       open "$(dirname "$res")"
+    fi
+}
+
 #------------------------------------------------------------------------------
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
