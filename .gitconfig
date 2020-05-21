@@ -1,25 +1,53 @@
 [core]
 	excludesfile = $HOME/.gitignore_global
+	editor = vim
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+
 [user]
 	name = sthtnr
-	email = beautifulwindmi11@gmail.com
+	email = sthtnr@gmail.com
 	signingkey = BC27DEF734440097
+
 [commit]
-	template = $HOME/.stCommitMsg
-	gpgsign = true
+	gpgsign = false
+
 [gpg]
 	program = /usr/local/bin/gpg
+
 [alias]
 # 良い感じのグラフでログを表示
-	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	graph = log --graph --date=short --abbrev-commit --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+# より簡潔な形でログを表示
+  graphLess = log --abbrev-commit --pretty=oneline
+
+	issue = "!ghi show $(echo $(git symbolic-ref --short HEAD) |awk -F "/" '{print $2}')"
+	preq = "!hub browse -- compare/master...$(git symbolic-ref --short HEAD)?body=%0A%23$(echo $(git symbolic-ref --short\
+ HEAD) |awk -F'[/_-]' '{print $2}')%0A%0A%23%20Before%0A%0A%23%20After%20%0A%0A"
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
+[github]
+	user = sthtnr
+
+[ghi]
+	token = !security find-internet-password -a sthtnr -s github.com -l 'ghi token' -w
+
+[fetch]
+	prune = true
+[grep]
+	lineNumber = true
+[color]
+	ui = always
+[color "diff"]
+	meta = blue black

@@ -15,7 +15,7 @@ set showcmd
 " コマンドラインの履歴を10000件保存する
 set history=10000 
 " シンタックスハイライト
-syntax on
+syntax enable
 " コメントの色をDarkCyanにする
 hi Comment ctermfg=DarkCyan
 " タブキー押下時に挿入される文字幅を指定
@@ -24,8 +24,22 @@ set softtabstop=2
 set tabstop=2
 " 行をまたいで移動
 set whichwrap=b,s,h,l,<,>,[,],~
-" Escをjjに置換
-inoremap <silent> jj <ESC>
+" カーソルラインを表示
+set cursorline
+" better 'smartindent'
+filetype plugin indent on
+" タブの幅をスペース2 つ分にする
+set tabstop=2
+" '>'でインデント時に、スペース2 つ分を使う
+set shiftwidth=2
+" タブ押下時にスペース2 つ分を使う
+set expandtab
+
+" キーの置換
+inoremap <silent> jf <ESC>
+nnoremap <silent> gj gg
+nnoremap <silent> gk G
+
 " 編集箇所のカーソルを記憶
 if has("autocmd")
   augroup redhat

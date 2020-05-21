@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 #------------------------------------------------------------------------------
 
 export PATH=$HOME/.nodebrew/current/bin:$HOME/go/bin:$PATH
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export GOPATH=$HOME/go
 export AWS_DEFAULT_PROFILE=dev_user
 export ZSH=$HOME/.oh-my-zsh
@@ -32,7 +32,7 @@ export PATH="/usr/local/opt/php@7.2/bin:$PATH"
 export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 
 export LANG=en_US.UTF-8
-export EDITOR='vim'
+export EDITOR="vim"
 
 #------------------------------------------------------------------------------
 # gpg
@@ -54,29 +54,54 @@ fi
 #------------------------------------------------------------------------------
 alias ls='exa'
 alias sl='exa'
-alias ll='exa -la'
+alias l='exa -la'
+alias ll='echo "(๑╹ω╹๑ ) ll => l"'
 alias lt='exa -T'
-alias lf='exa -bghHiS --git'
-
 alias relog='exec $SHELL -l'
 alias his='history'
+alias c='cd'
+alias p='pwd'
+alias t='type'
 alias pbc='pbcopy'
 alias pbp='pbpaste'
+
 alias dk='docker'
 alias dkc='docker-compose'
+# alias gcl='gcloud'
+alias kc='kubectl'
+alias v='vim'
+alias b='bat'
+alias n='npm'
+alias y='yarn'
 alias dots='git --git-dir=$HOME/.dots.git/ --work-tree=$HOME'
 
-alias gpull='git pull'
-alias gpush='git push'
-alias gs='git status'
-alias gd='git diff'
 alias ga='git add'
-alias gc='git commit'
-alias gcm='git commit -m'
 alias gb='git branch'
+alias gc='git commit'
+alias gcl='git clone'
+alias gcm='git commit -m'
 alias gco='git checkout'
-# see .gitignore for "graph" definition
-alias gl='git graph'
+alias gcon='git config'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdh='git diff HEAD~1..HEAD'
+alias gf='git fetch'
+alias gg='git grep'
+alias gl='git graphLess' # see .gitconfig for "graphLess" definition
+alias gll='git graph' # see .gitconfig for "graph" definition
+alias gpl='git pull'
+alias gps='git push'
+alias grb='git rebase'
+alias grs='git reset'
+alias gs='git status'
+alias gst='git stash'
+
+alias bl='blueutil --power 1'
+alias bll='blueutil --power 0'
+
+# 一時的なaliasなので時が満ちたら消してください
+alias gores='docker container prune -f && docker image prune -af && docker-compose up -d'
+alias ddd='docker-compose down && docker-compose up -d && docker ps'
 
 #------------------------------------------------------------------------------
 # FASD & FZF
@@ -141,5 +166,14 @@ o() {
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+eval "$(direnv hook zsh)"
+
 # redefine prompt_context for hiding user@hostname
 prompt_context() {}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/satouhitonari/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/satouhitonari/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/satouhitonari/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/satouhitonari/google-cloud-sdk/completion.zsh.inc'; fi
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
